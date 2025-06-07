@@ -55,6 +55,8 @@ public class EnemyController : MonoBehaviour
         if (target.CompareTag("Player"))
         {
             Debug.Log("Player takes damage! " + collision.gameObject.name);
+            PlayerController player = target.GetComponent<PlayerController>();
+            player.deal_damage(1, transform.position);
         }
         else
         {
