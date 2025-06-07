@@ -143,7 +143,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0060742497, y: 0.062261045}
@@ -171,6 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf9c33840098ec439a9958b6f4972c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  knockback_dist: 0.2
-  knockback_force: 5
+  max_speed: 1.5
+  acceleration: 10
+  friction: 10
+  knockback_from_enemy: 20
+  knockback_from_player: 40
+  enemy_collision_distance: 0.3

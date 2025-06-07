@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float acceleration = 2.0f;
     public float friction = 0.5f;
     public Tilemap map;
-    public TileBase trailTile;
+    public TileBase trail_tile;
 
     private Vector3 velocity;
     private Vector3 inputs;
@@ -23,16 +24,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //UpdateMovement();
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float inputY = Input.GetAxisRaw("Vertical");
-        inputs = new Vector3(inputX, inputY, 0f);
+        UpdateInputs();
         UpdateTrail();
     }
 
     private void FixedUpdate()
     {
         UpdateMovement();
+    }
+
+    void UpdateInputs()
+    {
+        float input_x = Input.GetAxisRaw("Horizontal");
+        float input_y = Input.GetAxisRaw("Vertical");
+        inputs = new Vector3(input_x, input_y, 0f);
     }
 
     void UpdateMovement()
@@ -50,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateTrail()
     {
-        Vector3Int currentTile = map.WorldToCell(transform.position);
-        map.SetTile(currentTile, trailTile);
+        Vector3Int current_tile = map.WorldToCell(transform.position);
+        map.SetTile(current_tile, trail_tile);
     }
 }
