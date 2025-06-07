@@ -78,5 +78,12 @@ public class EnemyController : MonoBehaviour
         {
             velocity += knockback_from_player * Time.fixedDeltaTime * direction;
         }
+        else if (target.CompareTag("Wellspring"))
+        {
+            Vector3 closest_point = collision.ClosestPoint(transform.position);
+            Vector3 normal = (transform.position - closest_point).normalized;
+            Vector3 tangent = new Vector3(-normal.y, normal.x);
+            velocity = Vector3.Dot(velocity, tangent) * tangent + knockback_from_enemy * Time.fixedDeltaTime * direction;
+        }
     }
 }

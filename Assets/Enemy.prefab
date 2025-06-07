@@ -175,5 +175,6 @@ MonoBehaviour:
   acceleration: 10
   friction: 10
   knockback_from_enemy: 20
-  knockback_from_player: 40
+  knockback_from_player: 50
   enemy_collision_distance: 0.3
+  player_collision_distance: 1
