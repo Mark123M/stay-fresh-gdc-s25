@@ -15,20 +15,20 @@ public class EnemyController : MonoBehaviour
     public float player_collision_distance = 1f;
 
     private Vector3 velocity;
-    private GameObject map;
-    private GameObject player;
+    private Tilemap map;
+    private PlayerController player;
 
     // Start is called before the first frame update
     void Start()
     {
         velocity = new Vector3(0f, 0f);
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (player != null)
         {
             Debug.Log("Player found!");
         }
-        map = GameObject.FindGameObjectWithTag("Map");
+        map = GameObject.FindGameObjectWithTag("Map").GetComponent<Tilemap>();
         if (map != null)
         {
             Debug.Log("Map found!");
@@ -47,6 +47,13 @@ public class EnemyController : MonoBehaviour
         velocity += acceleration * Time.fixedDeltaTime * direction;
         velocity = Vector3.ClampMagnitude(velocity, max_speed);
         transform.Translate(Time.fixedDeltaTime * velocity);
+
+        PlayerController player_controller = player.GetComponent<PlayerController>();
+        if (player_controller.cleansing)
+        {
+            Vector3Int current_tile = map.WorldToCell(transform.position);
+            Vector3Int player_tile = map.WorldToCell(player_controller.transform.position);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
@@ -25,6 +26,11 @@ public class PlayerController : MonoBehaviour
     private bool damage_taken;
     private bool stunned;
 
+    public bool slashing;
+    public bool cleansing;
+    public float cleanse_range = 2f;
+    public bool trailing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +38,9 @@ public class PlayerController : MonoBehaviour
         hp = max_hp;
         damage_taken = false;
         stunned = false;
+        slashing = false;
+        cleansing = false;
+        trailing = false;
         player_sprite = GetComponent<SpriteRenderer>();
     }
 
@@ -40,6 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateInputs();
         UpdateTrail();
+        UpdateAttacks(); // idk if it should be here?
     }
 
     private void FixedUpdate()
@@ -74,6 +84,23 @@ public class PlayerController : MonoBehaviour
     {
         Vector3Int current_tile = map.WorldToCell(transform.position);
         map.SetTile(current_tile, trail_tile);
+    }
+
+    void UpdateAttacks()
+    {
+        bool is_attacking = slashing || cleansing || trailing;
+        if (Input.GetKeyDown(KeyCode.X) && !is_attacking)
+        {
+            slashing = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Z) && !is_attacking)
+        {
+            cleansing = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.C) && !is_attacking)
+        {
+            trailing = true;
+        }
     }
 
     public void deal_damage(int damage, Vector3 position)
