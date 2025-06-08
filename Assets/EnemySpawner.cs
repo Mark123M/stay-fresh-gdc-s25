@@ -5,13 +5,15 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject enemy1_prefab;
+    private EnemyController enemy1_prefab;
     [SerializeField]
-    private GameObject enemy2_prefab;
+    private EnemyController enemy2_prefab;
     [SerializeField]
-    private GameObject enemy3_prefab;
+    private EnemyController enemy3_prefab;
 
     private float spawn_interval;
+
+    public List<EnemyController> enemies;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +31,8 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator spawnEnemy()
     {
         yield return new WaitForSeconds(spawn_interval);
-        GameObject enemy = Instantiate(enemy1_prefab, new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f)), Quaternion.identity);
+        EnemyController enemy = Instantiate(enemy1_prefab, new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f)), Quaternion.identity);
+        //enemies.Add(enemy);
         StartCoroutine(spawnEnemy());
     }
 }

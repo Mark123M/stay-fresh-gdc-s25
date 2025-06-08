@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.Windows;
 
 public class EnemyController : MonoBehaviour
 {
@@ -15,23 +16,19 @@ public class EnemyController : MonoBehaviour
     public float player_collision_distance = 1f;
 
     private Vector3 velocity;
-    private Tilemap map;
+    public Vector3 ext_velocity;
     private PlayerController player;
 
     // Start is called before the first frame update
     void Start()
     {
         velocity = new Vector3(0f, 0f);
+        ext_velocity = new Vector3(0f, 0f);
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (player != null)
         {
             Debug.Log("Player found!");
-        }
-        map = GameObject.FindGameObjectWithTag("Map").GetComponent<Tilemap>();
-        if (map != null)
-        {
-            Debug.Log("Map found!");
         }
     }
 
@@ -46,14 +43,14 @@ public class EnemyController : MonoBehaviour
         Vector3 direction = (player.transform.position - transform.position).normalized;
         velocity += acceleration * Time.fixedDeltaTime * direction;
         velocity = Vector3.ClampMagnitude(velocity, max_speed);
-        transform.Translate(Time.fixedDeltaTime * velocity);
 
-        PlayerController player_controller = player.GetComponent<PlayerController>();
-        if (player_controller.cleansing)
-        {
-            Vector3Int current_tile = map.WorldToCell(transform.position);
-            Vector3Int player_tile = map.WorldToCell(player_controller.transform.position);
-        }
+        ext_velocity -= friction * Time.fixedDeltaTime * ext_velocity;
+        transform.Translate(Time.fixedDeltaTime * (velocity + ext_velocity));
+    }
+
+    private void on_death()
+    {
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,6 +61,10 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Player takes damage! " + collision.gameObject.name);
             PlayerController player = target.GetComponent<PlayerController>();
             player.deal_damage(1, transform.position);
+        }
+        else if (target.CompareTag("Attack"))
+        {
+            on_death();
         }
         else
         {
