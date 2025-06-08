@@ -14,10 +14,16 @@ public class Wellspring : MonoBehaviour
     private MapManager map_manager;
     private PlayerController player;
     public TextMeshPro purity_display;
+    public Sprite healthy_sprite;
+    public Sprite hurt_sprite;
+    public Sprite dead_sprite;
+
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
+        sr = GetComponentInChildren<SpriteRenderer>();
         map_manager = GameObject.FindGameObjectWithTag("Map").GetComponent<MapManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         purity = 100f;
@@ -40,6 +46,19 @@ public class Wellspring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        purity_display.text = ((int)(purity)).ToString();
+        int purity_int = (int)purity;
+        if (purity_int > 50)
+        {
+            sr.sprite = healthy_sprite;
+        }
+        else if (purity_int > 0)
+        {
+            sr.sprite = hurt_sprite;
+        }
+        else
+        {
+            sr.sprite = dead_sprite;
+        }
+        purity_display.text = purity_int.ToString();
     }
 }

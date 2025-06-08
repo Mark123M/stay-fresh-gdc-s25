@@ -113,10 +113,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 0
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 0, a: 1}
-    topRight: {r: 1, g: 1, b: 0, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 0, a: 1}
-    bottomRight: {r: 1, g: 1, b: 0, a: 1}
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -271,8 +271,10 @@ MonoBehaviour:
   purify_rate: 10
   purify_range: 2
   purity: 0
-  map_manager: {fileID: 0}
   purity_display: {fileID: 8975934234168167470}
+  healthy_sprite: {fileID: 21300000, guid: ca1a40c4d7f023f4fbd09565e3db1c04, type: 3}
+  hurt_sprite: {fileID: 21300000, guid: b6e2b154ec4676741bc2517381a29e3a, type: 3}
+  dead_sprite: {fileID: 21300000, guid: 1e45f74ae9d9ad541ae82ab3446a77ed, type: 3}
 --- !u!1 &8011787266270379930
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +348,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ca1a40c4d7f023f4fbd09565e3db1c04, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e45f74ae9d9ad541ae82ab3446a77ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
