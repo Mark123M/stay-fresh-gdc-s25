@@ -9,6 +9,7 @@ public class MapManager : MonoBehaviour
     public Tilemap map;
     public Tile corrupt_tile;
     public Tile water_tile;
+    public Tile trail_tile;
     public TileData[] tile_datas;
     public Vector3Int[] neighbour_offsets;
     public Vector3Int[] neighbour_neighbour_offset;
@@ -107,9 +108,12 @@ public class MapManager : MonoBehaviour
                         {
                             if (map.GetTile(new_tile_coords) != corrupt_tile && !last_cleaned_tiles.Contains(new_tile_coords))
                             {
-                                map.SetTile(new_tile_coords, corrupt_tile);
-                                //corrupt_tiles_queue.Enqueue(new_tile_coord);
-                                next_corrupt_tiles_queue.Enqueue(new_tile_coords);
+                                if (map.GetTile(new_tile_coords) != trail_tile)
+                                {
+                                    map.SetTile(new_tile_coords, corrupt_tile);
+                                    //corrupt_tiles_queue.Enqueue(new_tile_coord);
+                                    next_corrupt_tiles_queue.Enqueue(new_tile_coords);
+                                }
                             }
 
                         }

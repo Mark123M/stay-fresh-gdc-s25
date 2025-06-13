@@ -132,11 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -159,6 +159,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -170,6 +178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6334813889152719344, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7656108143068292382, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_Name
       value: Wellsprings
@@ -177,7 +189,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1771292731551427157, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
 --- !u!1001 &83789804
 PrefabInstance:
@@ -193,6 +208,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1574807243706575810, guid: fb110e4ac9be265458e475495f51a849, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
+      propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
@@ -257,6 +276,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.914
       objectReference: {fileID: 0}
@@ -314,6 +337,7 @@ GameObject:
   - component: {fileID: 155103630}
   - component: {fileID: 155103629}
   - component: {fileID: 155103633}
+  - component: {fileID: 155103634}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -483,7 +507,7 @@ MonoBehaviour:
   damage_knockback: 10
   max_hp: 10
   map_manager: {fileID: 741902163}
-  trail_tile: {fileID: 11400000, guid: ea7e4f08e955b0e44826feb65b21d56b, type: 2}
+  trail_tile: {fileID: 11400000, guid: e3f083d8916f34d4b9c92950b78e77eb, type: 2}
   damage_flash: {fileID: 2100000, guid: e3e416feeeeb7904e836a276a2a9e6c1, type: 2}
   default_material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   enemy_spawner: {fileID: 1558320024}
@@ -491,14 +515,36 @@ MonoBehaviour:
   slash_right: {fileID: 601228486}
   slash_up: {fileID: 742461005}
   slash_down: {fileID: 1320327069}
+  myAnimator: {fileID: 155103634}
   slash_ready: 0
   slash_cooldown: 0.5
   cleanse_ready: 0
   cleanse_range: 2
   cleanse_force: 50
-  cleanse_cooldown: 1
+  cleanse_cooldown: 0.1
   trail_ready: 0
   trail_cooldown: 0
+--- !u!95 &155103634
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155103628}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 58e3e8d362a190c49a801a5167a49c0f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &165877456
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +914,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.803
       objectReference: {fileID: 0}
@@ -973,9 +1023,11 @@ MonoBehaviour:
   map: {fileID: 1720833178}
   corrupt_tile: {fileID: 11400000, guid: 925086d8fb79ad64ebe2363bc97f25be, type: 2}
   water_tile: {fileID: 11400000, guid: ea7e4f08e955b0e44826feb65b21d56b, type: 2}
+  trail_tile: {fileID: 11400000, guid: e3f083d8916f34d4b9c92950b78e77eb, type: 2}
   tile_datas:
   - {fileID: 11400000, guid: f538e5d91c06bfb4a9849c372517fc09, type: 2}
   - {fileID: 11400000, guid: 9b4a47053f6b4ac4d9bf82b95efd8e50, type: 2}
+  - {fileID: 11400000, guid: 6b0b4c968bba9744cbaf482404527982, type: 2}
   neighbour_offsets:
   - {x: 1, y: 0, z: 0}
   - {x: 0, y: 1, z: 0}
@@ -999,7 +1051,7 @@ MonoBehaviour:
   wellspring1: {fileID: 1070386866}
   wellspring2: {fileID: 1824683554}
   wellspring3: {fileID: 905044613}
-  spread_time: 2
+  spread_time: 5
 --- !u!1 &742461005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,6 +1195,10 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.78
       objectReference: {fileID: 0}
@@ -1201,7 +1257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1224,6 +1280,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -1235,6 +1299,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6334813889152719344, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7656108143068292382, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_Name
       value: Wellsprings (3)
@@ -1242,7 +1310,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1771292731551427157, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
 --- !u!114 &905044613 stripped
 MonoBehaviour:
@@ -1266,7 +1337,7 @@ GameObject:
   - component: {fileID: 1056860468}
   - component: {fileID: 1056860467}
   m_Layer: 0
-  m_Name: IMG_0699 (1)
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1348,12 +1419,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1376,6 +1455,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -1387,14 +1474,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5844571986578950445, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334813889152719344, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7656108143068292382, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_Name
       value: Wellsprings (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8310309995261123811, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: purity
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1771292731551427157, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
 --- !u!114 &1070386866 stripped
 MonoBehaviour:
@@ -1554,6 +1656,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614827060713584378, guid: fb110e4ac9be265458e475495f51a849, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.609
       objectReference: {fileID: 0}
@@ -1627,9 +1733,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57e6cbcd97458b4cb512c2082090de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawn_increase_rate: 0.05
   enemy1_prefab: {fileID: 2331701183521572669, guid: fb110e4ac9be265458e475495f51a849, type: 3}
   enemy2_prefab: {fileID: 0}
   enemy3_prefab: {fileID: 0}
+  spawn_interval: 5
   enemies: []
 --- !u!4 &1558320025
 Transform:
@@ -1699,7 +1807,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e01e4ab8131b4af48b03eec3c8896ea1, type: 2}
+  - {fileID: 2100000, guid: ddbc90495072e8f4f8d025591f7e5d7c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3513,9 +3621,13 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: ea7e4f08e955b0e44826feb65b21d56b, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 177
     m_Data: {fileID: 21300000, guid: c0c31388104637d49a621db4b7ce2c14, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
@@ -3574,11 +3686,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.37
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3601,6 +3713,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 2269566713220320415, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -3612,6 +3728,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6334813889152719344, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7656108143068292382, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
       propertyPath: m_Name
       value: Wellsprings (2)
@@ -3619,7 +3739,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1771292731551427157, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 10866b33f85483842a14f76acdfdc7f1, type: 3}
 --- !u!114 &1824683554 stripped
 MonoBehaviour:

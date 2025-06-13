@@ -35,25 +35,31 @@ public class PlayerController : MonoBehaviour
     public enum direction { up, down, left, right, none }
     private direction facing_direction;
 
+    public Animator myAnimator;
     public bool slash_ready;
     public float slash_cooldown;
     public bool cleanse_ready;
     public float cleanse_range = 2f;
     public float cleanse_force = 100f;
     public float cleanse_cooldown = 2f;
-    public bool trail_ready;
-    public float trail_cooldown;
+    public float trail_regen_timer = 5f; // 1 tile every 5 seconds
+    public float trail_tile_timer = 20;
+
+    public bool trail_on;
+    public int trail_count;
 
     // Start is called before the first frame update
     void Start()
     {
+        transform.localScale = new Vector3(-2, 2, 2);
         velocity = new Vector3(0f, 0f);
         hp = max_hp;
         damage_taken = false;
         stunned = false;
         slash_ready = true;
         cleanse_ready = true;
-        trail_ready = true;
+        trail_count = 0;
+        trail_on = false;
         facing_direction = direction.down;
         player_sprite = GetComponent<SpriteRenderer>();
         slash_left.SetActive(false);
@@ -61,13 +67,15 @@ public class PlayerController : MonoBehaviour
         slash_up.SetActive(false);
         slash_down.SetActive(false);
         facing_direction = direction.right;
+
+        StartCoroutine(regen_trail());
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateInputs();
-        //UpdateTrail();
+        UpdateTrail();
         UpdateAttacks(); // idk if it should be here?
     }
 
@@ -87,11 +95,13 @@ public class PlayerController : MonoBehaviour
             // default
             if (input_x > 0)
             {
-                facing_direction = direction.right;
+                transform.localScale = new Vector3(-3.5f, 3.5f, 3.5f);
+                facing_direction = direction.left;
             }
             if (input_x < 0)
             {
-                facing_direction = direction.left;
+                //facing_direction = direction.left;
+                transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
             }
             if (input_y < 0)
             {
@@ -120,19 +130,19 @@ public class PlayerController : MonoBehaviour
 
     void UpdateTrail()
     {
-        Vector3Int current_tile = map_manager.map.WorldToCell(transform.position);
-        map_manager.map.SetTile(current_tile, trail_tile);
     }
 
     void UpdateAttacks()
     {
         if (Input.GetKeyDown(KeyCode.X) && slash_ready)
         {
+            myAnimator.SetTrigger("slash");
             StartCoroutine(perform_slash());
             StartCoroutine(start_slash_cooldown());
         }
         else if (Input.GetKeyDown(KeyCode.C) && cleanse_ready)
         {
+            myAnimator.SetTrigger("cleanse");
             map_manager.cleanse_tiles(map_manager.map.WorldToCell(transform.position));
             foreach (var enemy in FindObjectsOfType<EnemyController>())
             {
@@ -144,9 +154,20 @@ public class PlayerController : MonoBehaviour
             }
             StartCoroutine(start_cleanse_cooldown());
         }
-        else if (Input.GetKeyDown(KeyCode.Z) && trail_ready)
+        else if (Input.GetKeyDown(KeyCode.Z))
         {
-            StartCoroutine(start_trail_cooldown());
+            trail_on = !trail_on;
+        }
+        if (trail_on && trail_count > 0)
+        {
+            myAnimator.SetTrigger("trail");
+            Vector3Int tile_coords = map_manager.map.WorldToCell(transform.position);
+            if (map_manager.map.GetTile(tile_coords) != trail_tile)
+            {
+                map_manager.map.SetTile(tile_coords, trail_tile);
+                trail_count -= 1;
+                StartCoroutine(apply_trail_tile(tile_coords));
+            }
         }
     }
     IEnumerator perform_slash()
@@ -187,11 +208,17 @@ public class PlayerController : MonoBehaviour
         cleanse_ready = true;
     }
 
-    IEnumerator start_trail_cooldown()
+    IEnumerator regen_trail()
     {
-        trail_ready = false;
-        yield return new WaitForSeconds(trail_cooldown);
-        trail_ready = true;
+        yield return new WaitForSeconds(trail_regen_timer);
+        trail_count++;
+        StartCoroutine(regen_trail());
+    }
+
+    IEnumerator apply_trail_tile(Vector3Int tile_coords)
+    {
+        yield return new WaitForSeconds(trail_tile_timer);
+        map_manager.map.SetTile(tile_coords, map_manager.water_tile);
     }
 
     public void deal_damage(int damage, Vector3 position)

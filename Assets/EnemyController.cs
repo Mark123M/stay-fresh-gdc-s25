@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.Windows;
+
 
 public class EnemyController : MonoBehaviour
 {
@@ -14,16 +11,20 @@ public class EnemyController : MonoBehaviour
     public float knockback_from_player = 10f;
     public float enemy_collision_distance = 0.3f;
     public float player_collision_distance = 1f;
+    public Tile trail_tile;
 
     private Vector3 velocity;
     public Vector3 ext_velocity;
     private PlayerController player;
+    private MapManager map_manager;
 
     // Start is called before the first frame update
     void Start()
     {
         velocity = new Vector3(0f, 0f);
         ext_velocity = new Vector3(0f, 0f);
+
+        map_manager = GameObject.FindGameObjectWithTag("Map").GetComponent<MapManager>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (player != null)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public float spawn_increase_rate = 0.2f;
     [SerializeField]
     private EnemyController enemy1_prefab;
     [SerializeField]
@@ -11,21 +12,24 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private EnemyController enemy3_prefab;
 
-    private float spawn_interval;
+    public float spawn_interval;
 
     public List<EnemyController> enemies;
 
     // Start is called before the first frame update
     void Start()
     {
-        spawn_interval = 3f;
         StartCoroutine(spawnEnemy());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+          
+    }
+    private void FixedUpdate()
+    {
+        spawn_interval = Mathf.Clamp(spawn_interval - spawn_increase_rate * Time.fixedDeltaTime, 0.5f, 100f) ;
     }
 
     private IEnumerator spawnEnemy()
